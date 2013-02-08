@@ -1,0 +1,105 @@
+fileFormatVersion: 2
+guid: 7d37cde2692ba284a97496aaa16806ea
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: Root
+    100002: Ripple_mesh03
+    100004: Ripple04
+    100006: Ripple_mesh05
+    100008: Ripple03
+    100010: Ripple_mesh06
+    100012: Ripple_mesh01
+    100014: Ripple05
+    100016: //RootNode
+    100018: Ripple_mesh02
+    100020: Ripple_mesh04
+    100022: Ripple_mesh07
+    100024: Ripple007
+    100026: Ripple02
+    100028: Ripple01
+    100030: Ripple06
+    100032: Bip01
+    400000: Root
+    400002: Ripple_mesh03
+    400004: Ripple04
+    400006: Ripple_mesh05
+    400008: Ripple03
+    400010: Ripple_mesh06
+    400012: Ripple_mesh01
+    400014: Ripple05
+    400016: //RootNode
+    400018: Ripple_mesh02
+    400020: Ripple_mesh04
+    400022: Ripple_mesh07
+    400024: Ripple007
+    400026: Ripple02
+    400028: Ripple01
+    400030: Ripple06
+    400032: Bip01
+    4300000: Ripple_mesh01
+    4300002: Ripple_mesh06
+    4300004: Ripple_mesh05
+    4300006: Ripple_mesh04
+    4300008: Ripple_mesh02
+    4300010: Ripple_mesh03
+    4300012: Ripple_mesh07
+    7400000: Take 001
+    11100000: //RootNode
+    13700000: Ripple_mesh03
+    13700002: Ripple_mesh05
+    13700004: Ripple_mesh06
+    13700006: Ripple_mesh01
+    13700008: Ripple_mesh02
+    13700010: Ripple_mesh04
+    13700012: Ripple_mesh07
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 1
+  userData: 

@@ -1,0 +1,73 @@
+fileFormatVersion: 2
+guid: 9ca941b0cab8b454cb3d9450de7c9459
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: Ripple04
+    100002: Ripple007
+    100004: Ripple03
+    100006: Ripple02
+    100008: Ripple06
+    100010: Ripple05
+    100012: //RootNode
+    100014: Ripple01
+    400000: Ripple04
+    400002: Ripple007
+    400004: Ripple03
+    400006: Ripple02
+    400008: Ripple06
+    400010: Ripple05
+    400012: //RootNode
+    400014: Ripple01
+    7400000: Wake_MainSplash01_Redux_ScaleFix
+    11100000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 1
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 1
+  userData: 
