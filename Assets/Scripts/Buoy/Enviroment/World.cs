@@ -3,9 +3,18 @@ using System.Collections;
 
 public class World : MonoBehaviour {
 	
+	private GameObject _messenger;
+	
 	// Use this for initialization
 	void Start () {
+		//PUT OURSELVES AT 0,0,0
 		gameObject.transform.position = Vector3.zero;
+		
+		//CREATE THE MESSENGER FOR BROADCASTING
+		_messenger = new GameObject();
+		_messenger.tag = "Messenger";
+		_messenger.AddComponent<Messenger>();
+		_messenger.transform.parent = gameObject.transform;
 		
 		//     N
 		// W       E
@@ -53,4 +62,10 @@ public class World : MonoBehaviour {
 		floor_wall_box_collider.size = new Vector3(100,20,100);
 		
 	}
+	
+	public GameObject messenger
+	{
+	    get { return _messenger; }
+	}
+	
 }

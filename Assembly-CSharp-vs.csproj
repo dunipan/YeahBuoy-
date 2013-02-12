@@ -44,10 +44,12 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Buoy\Enviroment\Messenger.cs" />
      <Compile Include="Assets\Scripts\Buoy\Enviroment\World.cs" />
      <Compile Include="Assets\Scripts\Buoy\GUI\LifePreservers.cs" />
      <Compile Include="Assets\Scripts\Buoy\GUI\Scoreboard.cs" />
      <Compile Include="Assets\Scripts\Buoy\Interactables\Buoy.cs" />
+     <Compile Include="Assets\Scripts\Buoy\Interactables\Interactable.cs" />
      <Compile Include="Assets\Scripts\Buoy\Interactables\PenaltyObject.cs" />
      <Compile Include="Assets\Scripts\Buoy\NewBehaviourScript.cs" />
      <Compile Include="Assets\Scripts\BuoyancyForce.cs" />

@@ -44,16 +44,11 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Camera_Click.js" />
-     <Compile Include="Assets\Scripts\CountdownTimer.js" />
      <Compile Include="Assets\Scripts\GUI Scripts\GameGUI.js" />
      <Compile Include="Assets\Scripts\GUI Scripts\LevelCompleteGUI.js" />
      <Compile Include="Assets\Scripts\GUI Scripts\LevelSelectGUI.js" />
      <Compile Include="Assets\Scripts\GUI Scripts\LifePreserverSwap.js" />
      <Compile Include="Assets\Scripts\GUI Scripts\SplashScreen.js" />
-     <Compile Include="Assets\Scripts\ObjectScoringInteraction.js" />
-     <Compile Include="Assets\Scripts\Player_Click.js" />
-     <Compile Include="Assets\Scripts\ScoringScript.js" />
      <Compile Include="Assets\Scripts\WakeInstantiate.js" />
      <Compile Include="Assets\Standard Assets (Mobile)\Scripts\CameraRelativeControl.js" />
      <Compile Include="Assets\Standard Assets (Mobile)\Scripts\FirstPersonControl.js" />

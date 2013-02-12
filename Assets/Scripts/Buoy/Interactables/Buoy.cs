@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Buoy : MonoBehaviour {
+public class Buoy : Interactable {
 	//MAX DISTANCE A CLICK CAN BE FROM THE BUOY'S CENTER
 	const float RADIUS = 7.0f;
 	
@@ -12,6 +12,7 @@ public class Buoy : MonoBehaviour {
 	Transform swimmer;
 	
 	void Start () {
+		base.Start();
 		gameObject.tag = "Buoy";
 		swimmer = GameObject.FindGameObjectWithTag("Swimmer").transform;
 	}
@@ -48,5 +49,10 @@ public class Buoy : MonoBehaviour {
 		//ROTATE TO LOOK IN THE DIRECTION WE ARE GOING
 		transform.LookAt(worldPosVector3);
     }
+	
+	protected override void DoInteraction(Rigidbody rb) 
+	{
+		D.Log("Buoy hit: " + rb.gameObject.ToString());
+	}
 	
 }
