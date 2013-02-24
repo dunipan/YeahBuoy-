@@ -3,7 +3,7 @@ using System.Collections;
 
 public class World : MonoBehaviour {
 	
-	private GameObject _messenger;
+	protected static GameObject _messenger;
 	
 	// Use this for initialization
 	void Start () {
@@ -11,10 +11,10 @@ public class World : MonoBehaviour {
 		gameObject.transform.position = Vector3.zero;
 		
 		//CREATE THE MESSENGER FOR BROADCASTING
-		_messenger = new GameObject();
-		_messenger.tag = "Messenger";
-		_messenger.AddComponent<Messenger>();
-		_messenger.transform.parent = gameObject.transform;
+		World._messenger = new GameObject();
+		World._messenger.tag = "Messenger";
+		World._messenger.AddComponent<Messenger>();
+		World._messenger.transform.parent = gameObject.transform;
 		
 		//     N
 		// W       E
@@ -63,7 +63,7 @@ public class World : MonoBehaviour {
 		
 	}
 	
-	public GameObject messenger
+	public static GameObject messenger
 	{
 	    get { return _messenger; }
 	}

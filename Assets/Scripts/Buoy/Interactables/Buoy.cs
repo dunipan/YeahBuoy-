@@ -2,11 +2,14 @@ using UnityEngine;
 using System.Collections;
 
 public class Buoy : Interactable {
+	
+	public const string BUOY_HIT_OBJECT = "buoyHitObject";
+	
 	//MAX DISTANCE A CLICK CAN BE FROM THE BUOY'S CENTER
-	const float RADIUS = 7.0f;
+	public const float RADIUS = 7.0f;
 	
 	//FORCE MULTIPLIER FOR OUR CLICKS
-	const float POWER = 180.0f;
+	public const float POWER = 180.0f;
 	
 	bool Looking = true;
 	Transform swimmer;
@@ -17,7 +20,6 @@ public class Buoy : Interactable {
 		swimmer = GameObject.FindGameObjectWithTag("Swimmer").transform;
 	}
 	
-	void Update () { }
 	void FixedUpdate (){ }
 	
 	float ForceMultiplier(Vector3 worldPosVector3){
@@ -47,12 +49,17 @@ public class Buoy : Interactable {
 		rigidbody.AddForce(direction.normalized * ForceMultiplier(worldPosVector3));
 		
 		//ROTATE TO LOOK IN THE DIRECTION WE ARE GOING
-		transform.LookAt(worldPosVector3);
+		LookAt(worldPosVector3);
     }
 	
 	protected override void DoInteraction(Rigidbody rb) 
 	{
-		D.Log("Buoy hit: " + rb.gameObject.ToString());
+		D.Log<GameObject>(rb.gameObject);
+		PenaltyObject po = rb.gameObject.GetComponent<PenaltyObject>();
+		D.Log<PenaltyObject>(po);
+		if (po){
+			Messenger<Rigidbody>.Broadcast(Buoy.BUOY_HIT_OBJECT, rb);
+		}
 	}
 	
 }

@@ -9,13 +9,18 @@ public static class D {
 			Debug.Log("[" + Time.timeSinceLevelLoad.ToString() + "] " +output);
 		}
 	}
-	
-	public static void Log(string output, float level=10f){
-		
+	private static void _warn(string output, float level){
+		if (level > D.min_level){
+			Debug.LogWarning("[" + Time.timeSinceLevelLoad.ToString() + "] " +output);
+		}
 	}
 	
-	
-	public static void Log(GameObject output, float level=10f){
-		
+	public static void Log<T>(T output, float level=10f){
+		if (output == null){
+			Debug.Log (output);
+			D._warn("Value was null", level);
+		}else{
+			D._log(output.ToString(), level);
+		}
 	}
 }

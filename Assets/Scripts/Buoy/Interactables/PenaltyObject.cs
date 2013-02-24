@@ -14,7 +14,7 @@ public class PenaltyObject : Interactable {
 	
 	protected override void DoInteraction(Rigidbody rb) 
 	{
-		D.Log ("PO hit: " + rb.gameObject.ToString());
+		D.Log<string> ("PO hit: " + rb.gameObject.ToString());
 	}
 	
 	
