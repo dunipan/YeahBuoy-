@@ -10,6 +10,7 @@ public class Scoreboard : MonoBehaviour {
 	public const float TICK_INTERVAL = 0.01f;
 	
 	private int _score;
+	private bool _running = true;
 	private GUIText textfield;
 	
 	void Start () {
@@ -21,7 +22,7 @@ public class Scoreboard : MonoBehaviour {
 	
 	
 	IEnumerator Ticker () {
-		while(_score > 0) {
+		while(_score > 0 && _running) {
 			_score -= Scoreboard.TICK_VALUE;
 			if (_score == 6660){
 				Messenger<int>.Broadcast(Scoreboard.TIME_PENALTY, _score);
@@ -34,4 +35,16 @@ public class Scoreboard : MonoBehaviour {
 
 		yield return null;
     }
+	
+	void onLevelFinish(Rigidbody rb){
+		_running = false;
+	}
+	
+	void OnEnable()	{
+		Messenger<Rigidbody>.AddListener(Buoy.BUOY_HIT_WIN_OBJECT, onLevelFinish);
+	}
+	
+	void OnDisable(){
+		Messenger<Rigidbody>.AddListener(Buoy.BUOY_HIT_WIN_OBJECT, onLevelFinish);
+	}
 }

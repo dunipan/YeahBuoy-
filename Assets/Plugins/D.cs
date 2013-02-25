@@ -17,10 +17,18 @@ public static class D {
 	
 	public static void Log<T>(T output, float level=10f){
 		if (output == null){
-			Debug.Log (output);
 			D._warn("Value was null", level);
 		}else{
 			D._log(output.ToString(), level);
+		}
+	}
+	
+	
+	public static void Warn<T>(T output, float level=10f){
+		if (output == null){
+			D._warn("Value was null", level);
+		}else{
+			D._warn(output.ToString(), level);
 		}
 	}
 }

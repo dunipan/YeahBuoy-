@@ -4,6 +4,7 @@ using System.Collections;
 public class Buoy : Interactable {
 	
 	public const string BUOY_HIT_OBJECT = "buoyHitObject";
+	public const string BUOY_HIT_WIN_OBJECT = "buoyHitWinObject";
 	
 	//MAX DISTANCE A CLICK CAN BE FROM THE BUOY'S CENTER
 	public const float RADIUS = 7.0f;
@@ -54,9 +55,7 @@ public class Buoy : Interactable {
 	
 	protected override void DoInteraction(Rigidbody rb) 
 	{
-		D.Log<GameObject>(rb.gameObject);
 		PenaltyObject po = rb.gameObject.GetComponent<PenaltyObject>();
-		D.Log<PenaltyObject>(po);
 		if (po){
 			Messenger<Rigidbody>.Broadcast(Buoy.BUOY_HIT_OBJECT, rb);
 		}

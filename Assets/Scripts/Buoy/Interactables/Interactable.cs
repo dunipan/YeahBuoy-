@@ -1,15 +1,15 @@
 using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
 public class Interactable : MonoBehaviour {
-	
 	//COOLDOWN SO THE SAME OBJECTS COLLIDING DON'T KEEP SPAMMING
 	public float hitCooldownInSeconds = 3.0f;
 	
 	public List<Rigidbody> recentHits;
 	
-	private Vector3 lookAtTarget;
+	public Vector3 lookAtTarget;
 	private bool lookAtEnabled;
 	private Quaternion lookAtRotationStart;
 	private float lookAtRotationPercent;
@@ -24,11 +24,11 @@ public class Interactable : MonoBehaviour {
 	protected void OnCollisionEnter(Collision collision) {
 		ContactPoint contact = collision.contacts[0];
 		Rigidbody rb = GameObjectExtensions.FirstAncestorOfType<Rigidbody>(contact.otherCollider.gameObject);
-		
 		if (rb){
 			if (hitCooldownInSeconds > 0f){
 				if (recentHits.IndexOf(rb) == -1){
 					recentHits.Add(rb);
+					InteractionForce(collision.relativeVelocity.magnitude);
 					DoInteraction(rb);
 					StartCoroutine("DropGameObject", rb);
 				}
@@ -46,6 +46,7 @@ public class Interactable : MonoBehaviour {
 	public void LookAt(Vector3 target) { 
 		lookAtTarget = target;
 		lookAtTarget.y = 0;
+		D.Log<Vector3>( lookAtTarget );
 		lookAtEnabled = true;
 		RestartLookProcess();
 	}
@@ -74,5 +75,15 @@ public class Interactable : MonoBehaviour {
 			
 			transform.rotation = targetAngle;
 		}
+	}
+	
+	protected void InteractionForce(float force) 
+	{
+		try{
+			Messenger<GameObject, float>.Broadcast(ForceBasedAnimation.FORCE_BASED_ANIMATION_CHANGE, gameObject, force);
+		}catch(Exception e){
+			D.Warn<Exception>(e);
+		}
+		
 	}
 }

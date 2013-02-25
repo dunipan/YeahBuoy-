@@ -79,10 +79,12 @@ public class LifePreservers : MonoBehaviour {
 	}
 	
 	void onTimePenalty(int score){
-		D.Log<string>( score.ToString() );
 		_score -= 1;
 	}
 	
+	void onLevelFinish(Rigidbody rb){
+		
+	}
 	void onBuoyHit(Rigidbody rb){
 		_score -= 1;
 	}
@@ -90,10 +92,12 @@ public class LifePreservers : MonoBehaviour {
 	void OnEnable()	{
 		Messenger<int>.AddListener(Scoreboard.TIME_PENALTY, onTimePenalty);
 		Messenger<Rigidbody>.AddListener(Buoy.BUOY_HIT_OBJECT, onBuoyHit);
+		Messenger<Rigidbody>.AddListener(Buoy.BUOY_HIT_WIN_OBJECT, onLevelFinish);
 	}
 	
 	void OnDisable(){
 		Messenger<int>.RemoveListener(Scoreboard.TIME_PENALTY, onTimePenalty);
 		Messenger<Rigidbody>.RemoveListener(Buoy.BUOY_HIT_OBJECT, onBuoyHit);
+		Messenger<Rigidbody>.AddListener(Buoy.BUOY_HIT_WIN_OBJECT, onLevelFinish);
 	}
 }

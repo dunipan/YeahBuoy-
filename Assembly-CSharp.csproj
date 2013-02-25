@@ -49,8 +49,10 @@
      <Compile Include="Assets\Scripts\Buoy\GUI\LifePreservers.cs" />
      <Compile Include="Assets\Scripts\Buoy\GUI\Scoreboard.cs" />
      <Compile Include="Assets\Scripts\Buoy\Interactables\Buoy.cs" />
+     <Compile Include="Assets\Scripts\Buoy\Interactables\ForceBasedAnimation.cs" />
      <Compile Include="Assets\Scripts\Buoy\Interactables\Interactable.cs" />
      <Compile Include="Assets\Scripts\Buoy\Interactables\PenaltyObject.cs" />
+     <Compile Include="Assets\Scripts\Buoy\Interactables\WinObject.cs" />
      <Compile Include="Assets\Scripts\Buoy\NewBehaviourScript.cs" />
      <Compile Include="Assets\Scripts\BuoyancyForce.cs" />
      <Compile Include="Assets\Scripts\FluidVolume.cs" />
