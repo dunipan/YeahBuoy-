@@ -47,6 +47,7 @@
      <Compile Include="Assets\Scripts\Buoy\Enviroment\Messenger.cs" />
      <Compile Include="Assets\Scripts\Buoy\Enviroment\World.cs" />
      <Compile Include="Assets\Scripts\Buoy\GUI\LifePreservers.cs" />
+     <Compile Include="Assets\Scripts\Buoy\GUI\OnScreenText.cs" />
      <Compile Include="Assets\Scripts\Buoy\GUI\Scoreboard.cs" />
      <Compile Include="Assets\Scripts\Buoy\Interactables\Buoy.cs" />
      <Compile Include="Assets\Scripts\Buoy\Interactables\ForceBasedAnimation.cs" />

@@ -1,20 +1,17 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class World : MonoBehaviour {
 	
-	protected static GameObject _messenger;
-	
+	public static World _world;
+	public static List<GameObject> _left_to_hit;
+	public Font popup_font;
 	// Use this for initialization
 	void Start () {
+		World._world = this;
 		//PUT OURSELVES AT 0,0,0
 		gameObject.transform.position = Vector3.zero;
-		
-		//CREATE THE MESSENGER FOR BROADCASTING
-		World._messenger = new GameObject();
-		World._messenger.tag = "Messenger";
-		World._messenger.AddComponent<Messenger>();
-		World._messenger.transform.parent = gameObject.transform;
 		
 		//     N
 		// W       E
@@ -63,9 +60,47 @@ public class World : MonoBehaviour {
 		
 	}
 	
-	public static GameObject messenger
+	public static World current_world
 	{
-	    get { return _messenger; }
+	    get { return World._world; }
 	}
 	
+	public static List<GameObject> left_to_hit
+	{
+	    get { 
+			if (World._left_to_hit == null){
+				World._left_to_hit = new List<GameObject>();
+			}
+			return World._left_to_hit; 
+		}
+	}
+	
+	public static void winning_object_created(GameObject go){
+		if (World.left_to_hit.IndexOf(go) == -1){
+			World.left_to_hit.Add(go);
+		}
+	}
+	
+	public static void winning_object_hit(GameObject go){
+		if (World.left_to_hit.IndexOf(go) > -1){
+			World.left_to_hit.Remove(go);
+		}
+		if (World.left_to_hit.Count == 0){
+			Messenger<Rigidbody>.Broadcast(Buoy.BUOY_HIT_FINAL_WIN_OBJECT, go.rigidbody);
+		}else{
+			Messenger<Rigidbody>.Broadcast(Buoy.BUOY_HIT_WIN_OBJECT, go.rigidbody);	
+		}
+	}
+	
+	void onLevelFinish(Rigidbody rb){
+		World.left_to_hit.Clear();
+	}
+	
+	void OnEnable()	{
+		Messenger<Rigidbody>.AddListener(Buoy.BUOY_HIT_FINAL_WIN_OBJECT, onLevelFinish);
+	}
+	
+	void OnDisable(){
+		Messenger<Rigidbody>.RemoveListener(Buoy.BUOY_HIT_FINAL_WIN_OBJECT, onLevelFinish);
+	}
 }

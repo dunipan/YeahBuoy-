@@ -4,20 +4,13 @@ using System.Collections.Generic;
 
 public class PenaltyObject : Interactable {
 	
-	
+	public int penalty = 200;
 	
 	void Start () {
 		base.Start();
 	}
 	
-	void Update () {
-	
-	}
-		
-	protected override void DoInteraction(Rigidbody rb) 
-	{
-		D.Log<string> ("PO hit: " + rb.gameObject.ToString());
-	}
+	protected override void DoInteraction(Rigidbody rb) { }
 	
 	
 }

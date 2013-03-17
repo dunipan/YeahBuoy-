@@ -91,13 +91,11 @@ public class LifePreservers : MonoBehaviour {
 	
 	void OnEnable()	{
 		Messenger<int>.AddListener(Scoreboard.TIME_PENALTY, onTimePenalty);
-		Messenger<Rigidbody>.AddListener(Buoy.BUOY_HIT_OBJECT, onBuoyHit);
-		Messenger<Rigidbody>.AddListener(Buoy.BUOY_HIT_WIN_OBJECT, onLevelFinish);
+		Messenger<Rigidbody>.AddListener(Buoy.BUOY_HIT_FINAL_WIN_OBJECT, onLevelFinish);
 	}
 	
 	void OnDisable(){
 		Messenger<int>.RemoveListener(Scoreboard.TIME_PENALTY, onTimePenalty);
-		Messenger<Rigidbody>.RemoveListener(Buoy.BUOY_HIT_OBJECT, onBuoyHit);
-		Messenger<Rigidbody>.AddListener(Buoy.BUOY_HIT_WIN_OBJECT, onLevelFinish);
+		Messenger<Rigidbody>.AddListener(Buoy.BUOY_HIT_FINAL_WIN_OBJECT, onLevelFinish);
 	}
 }

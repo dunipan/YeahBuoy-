@@ -9,14 +9,12 @@ public class Interactable : MonoBehaviour {
 	
 	public List<Rigidbody> recentHits;
 	
-	public Vector3 lookAtTarget;
-	private bool lookAtEnabled;
-	private Quaternion lookAtRotationStart;
-	private float lookAtRotationPercent;
+	
+	//private Quaternion lookAtRotationStart;
+	//private float lookAtRotationPercent;
 	
 	protected void Start () {
 		recentHits = new List<Rigidbody>();
-		lookAtEnabled = false;
 	}
 	
 	protected virtual void DoInteraction (Rigidbody rb) { }
@@ -43,6 +41,7 @@ public class Interactable : MonoBehaviour {
 		recentHits.Remove(rb);
 	}
 	
+	/*
 	public void LookAt(Vector3 target) { 
 		lookAtTarget = target;
 		lookAtTarget.y = 0;
@@ -59,8 +58,7 @@ public class Interactable : MonoBehaviour {
      		lookAtRotationPercent = 1f; 
 		}
 	}
-	
-	protected void LateUpdate() {
+	protected void LateUpdate2() {
 		if( lookAtEnabled ){
 			Quaternion targetAngle = Quaternion.LookRotation( lookAtTarget - transform.position, transform.up );
 			if( lookAtRotationPercent < 1f ) {
@@ -70,12 +68,14 @@ public class Interactable : MonoBehaviour {
 				}
 			}
 			if (Quaternion.Dot(targetAngle,transform.rotation) < 0.999f){
-				transform.rotation = targetAngle;
+				//transform.rotation = targetAngle;
+				transform.LookAt(lookAtTarget);
 			}
 			
 			transform.rotation = targetAngle;
 		}
 	}
+	*/
 	
 	protected void InteractionForce(float force) 
 	{
