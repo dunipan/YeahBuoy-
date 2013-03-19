@@ -15,7 +15,7 @@ public class Buoy : Interactable {
 	
 	private Vector3 lookAtTarget = Vector3.zero;
 	private bool lookAtEnabled = false;
-	
+		
 	void Start () {
 		base.Start();
 		gameObject.tag = "Buoy";
