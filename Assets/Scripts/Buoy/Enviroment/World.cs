@@ -8,12 +8,16 @@ public class World : MonoBehaviour {
 	public static List<GameObject> _left_to_hit;
 	public Font popup_font;
 	
-	public float width = 30f;
-	public float height = 22.5f;
+	public float width = 25.5f;
+	public float height = 25f;
 	protected float _padding_up = 10f;
 	protected float _padding_depth = 100f;
 	protected float _padding_overflow = 10f;
 	protected float _inner_padding = 1f;
+	
+	public bool show_ruler = false;
+	public Material ruler_mesh1;
+	public Material ruler_mesh2;
 	
 	void Start () {
 		World._world = this;
@@ -78,6 +82,15 @@ public class World : MonoBehaviour {
 		
 		Camera.mainCamera.gameObject.transform.parent = camera_container.transform;
 		Camera.mainCamera.gameObject.AddComponent<CameraController>();
+		
+		if (show_ruler && ruler_mesh1 != null && ruler_mesh2 != null){
+			GameObject ruler = new GameObject();
+			ruler.name = "RULER";
+			ruler.transform.parent = this.gameObject.transform;
+			Ruler r = ruler.AddComponent<Ruler>();
+			r.GenerateRuler(ruler_mesh1, ruler_mesh2);
+		}
+		
 	}
 	
 	public static World current_world

@@ -46,6 +46,8 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Buoy\Enviroment\CameraController.cs" />
      <Compile Include="Assets\Scripts\Buoy\Enviroment\Messenger.cs" />
+     <Compile Include="Assets\Scripts\Buoy\Enviroment\Ruler.cs" />
+     <Compile Include="Assets\Scripts\Buoy\Enviroment\RulerMesh.cs" />
      <Compile Include="Assets\Scripts\Buoy\Enviroment\World.cs" />
      <Compile Include="Assets\Scripts\Buoy\GUI\LifePreservers.cs" />
      <Compile Include="Assets\Scripts\Buoy\GUI\OnScreenText.cs" />
