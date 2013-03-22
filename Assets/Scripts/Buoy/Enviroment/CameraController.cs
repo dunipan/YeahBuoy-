@@ -5,6 +5,7 @@ public class CameraController : MonoBehaviour {
 	
 	protected GameObject buoy;
 	protected Transform buoy_transform;
+	protected Rigidbody buoy_rigidbody;
 	protected Transform parent_transform;
 	protected Camera camera;
 	
@@ -13,9 +14,13 @@ public class CameraController : MonoBehaviour {
 	protected float left = 300;
 	protected float right = 300;
 	
+	protected bool moving = false;
+	
+	
 	void Start () {
 		buoy = GameObject.FindGameObjectWithTag("Buoy");
 		buoy_transform = buoy.transform;
+		buoy_rigidbody = buoy.rigidbody;
 		parent_transform = gameObject.transform.parent;
 		camera = Camera.mainCamera;
 		camera.gameObject.transform.localPosition = new Vector3(0, 10, camera.orthographicSize*-1);
@@ -28,19 +33,23 @@ public class CameraController : MonoBehaviour {
 		}
 	}
 	
-	void Update () {
-		Vector3 onScreen = camera.WorldToScreenPoint(buoy_transform.position);
-		Rect r = _padding;
-		if ( !r.Contains(onScreen) ){
-			Vector3 target = parent_transform.position;
-			target = Vector3.Slerp( parent_transform.position, buoy_transform.position, 0.5f * Time.deltaTime);
-			if (onScreen.x > r.xMin && onScreen.x < r.xMax){
+	void EvalOnScreenPosition(Vector3 onScreenPos,  Vector3 worldPosition ){		
+		Rect screen_safe = _padding;
+		if ( !screen_safe.Contains(onScreenPos) ){			
+			Vector3 target = Vector3.Slerp( parent_transform.position, worldPosition, 0.5f * Time.deltaTime);
+			if (onScreenPos.x > screen_safe.xMin && onScreenPos.x < screen_safe.xMax){
 				target.x = parent_transform.position.x;
 			}
-			if (onScreen.y > r.yMin && onScreen.y < r.yMax){
+			if (onScreenPos.y > screen_safe.yMin && onScreenPos.y < screen_safe.yMax){
 				target.z = parent_transform.position.z;
 			}
 			parent_transform.position = target;
 		}
+	}
+	
+	void Update(){
+		Vector3 camera_target = buoy_transform.position + buoy_rigidbody.velocity;
+		Vector3 onScreenPos = camera.WorldToScreenPoint(camera_target);
+		EvalOnScreenPosition(onScreenPos, camera_target);
 	}
 }

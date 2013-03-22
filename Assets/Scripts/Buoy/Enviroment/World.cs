@@ -19,6 +19,8 @@ public class World : MonoBehaviour {
 	public Material ruler_mesh1;
 	public Material ruler_mesh2;
 	
+	public Rect WorldRect;
+	
 	void Start () {
 		World._world = this;
 		//PUT OURSELVES AT 0,0,0
@@ -27,8 +29,6 @@ public class World : MonoBehaviour {
 		//     N
 		// W       E
 		//     S
-		
-		float dim;
 		
 		//WEST WALL
 		GameObject west_wall = new GameObject();
@@ -71,6 +71,8 @@ public class World : MonoBehaviour {
 		floor_wall_box_collider.size = new Vector3(width+_padding_overflow,_padding_up,height+_padding_overflow);
 		
 		
+		WorldRect = new Rect( _inner_padding, height -_inner_padding, width - _inner_padding*2, height- _inner_padding*2);
+		
 		//CAMERA CONTROL CLASS
 		GameObject camera_container = new GameObject();
 		camera_container.name = "__CAMERA";
@@ -94,6 +96,24 @@ public class World : MonoBehaviour {
 			r.GenerateRuler(ruler_mesh1, ruler_mesh2);
 		}
 		
+	}
+	
+	public Vector3 CapPosition(Vector3 worldPos){
+		Vector2 pos = new Vector2( worldPos.x, worldPos.z);
+		if (!WorldRect.Contains( pos )){
+			if (pos.x < WorldRect.xMin){
+				worldPos.x = WorldRect.xMin;
+			}else if(pos.x > WorldRect.xMax){
+				worldPos.x = WorldRect.xMax;
+			}
+			
+			if (pos.y < WorldRect.yMin){
+				worldPos.z = WorldRect.yMin;
+			}else if(pos.y > WorldRect.yMax){
+				worldPos.z = WorldRect.yMax;
+			}
+		}
+		return worldPos;
 	}
 	
 	public static World current_world

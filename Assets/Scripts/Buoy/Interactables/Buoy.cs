@@ -6,6 +6,7 @@ public class Buoy : Interactable {
 	public const string BUOY_HIT_PENALTY_OBJECT = "buoyHitPenaltyObject";
 	public const string BUOY_HIT_WIN_OBJECT = "buoyHitWinObject";
 	public const string BUOY_HIT_FINAL_WIN_OBJECT = "buoyHitFinalWinObject";
+	public const string BUOY_NEW_FORCE = "buoyNewForce";
 	
 	//MAX DISTANCE A CLICK CAN BE FROM THE BUOY'S CENTER
 	public const float RADIUS = 7.0f;
@@ -15,13 +16,32 @@ public class Buoy : Interactable {
 	
 	private Vector3 lookAtTarget = Vector3.zero;
 	private bool lookAtEnabled = false;
-		
+	
+	private GameObject _debug_cube;
+	
 	void Start () {
 		base.Start();
 		gameObject.tag = "Buoy";
+		
+		_debug_cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+		_debug_cube.renderer.material = World.current_world.ruler_mesh1;
+		Collider.Destroy(_debug_cube.collider);
 	}
 	
-	void FixedUpdate (){ }
+	void FixedUpdate (){
+		if( lookAtEnabled ){
+		    lookAtTarget.y = transform.position.y;
+			Quaternion q = Quaternion.LookRotation(lookAtTarget - transform.position);
+			float f = 5 * Time.deltaTime;
+			float dot = Quaternion.Dot(q, transform.rotation);
+			if (dot > 0.99999f){
+				lookAtEnabled = false;
+			}
+		    transform.rotation = Quaternion.Slerp(transform.rotation, q , f);
+		}
+		
+		_debug_cube.transform.position = transform.position + rigidbody.velocity;
+	}
 	
 	float ForceMultiplier(Vector3 worldPosVector3){
 		//FIND THE DISTANCE FROM THE BUOY TO THE CLICK POINT AND SUBTRACT THAT FROM THE RADIUS TO
@@ -53,19 +73,6 @@ public class Buoy : Interactable {
 		lookAtTarget = worldPosVector3;
 		lookAtEnabled = true;
     }
-	
-	protected void LateUpdate(){
-		if( lookAtEnabled ){
-		    lookAtTarget.y = transform.position.y;
-			Quaternion q = Quaternion.LookRotation(lookAtTarget - transform.position);
-			float f = 5 * Time.deltaTime;
-			float dot = Quaternion.Dot(q, transform.rotation);
-			if (dot > 0.99999f){
-				lookAtEnabled = false;
-			}
-		    transform.rotation = Quaternion.Slerp(transform.rotation, q , f);
-		}
-	}
 	
 	protected override void DoInteraction(Rigidbody rb) 
 	{

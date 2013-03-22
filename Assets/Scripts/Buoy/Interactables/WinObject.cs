@@ -42,6 +42,7 @@ public class WinObject : Interactable {
 			yield return new WaitForSeconds(points_interval);
 	    }
 		if (points_left <= 0 && _running){
+			//TODO: NO ONE IS LISTENING TO THIS
 			Messenger<GameObject>.Broadcast(WinObject.WIN_OBJECT_DEAD, this.gameObject);
 		}
 		yield return null;
