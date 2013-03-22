@@ -8,11 +8,11 @@ public class Ruler : MonoBehaviour {
 	public void GenerateRuler(Material mat1, Material mat2){
 		Transform me = this.gameObject.transform;
 		int x = 0;
-		while (x < 50){
+		while (x < 25){
 			
 			int z = 0;
-			while (z < 50){
-				if (x % 10.0 != 0.0 && z % 10.0 != 0.0){
+			while (z < 25){
+				if (x % 10.0 != 0.0 && z % 10.0 != 0.0 || x == 0.0 || z == 0.0){
 					GameObject go = CreateUnit();
 					MeshRenderer mr = go.GetComponent<MeshRenderer>();
 					go.transform.parent = me;

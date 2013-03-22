@@ -29,55 +29,58 @@ public class World : MonoBehaviour {
 		//     S
 		
 		float dim;
+		
+		//WEST WALL
 		GameObject west_wall = new GameObject();
 		west_wall.name = "_west_wall";
 		west_wall.transform.parent = gameObject.transform;
-		west_wall.transform.position = new Vector3(_padding_depth*-0.5f+_inner_padding,0,(height+_padding_overflow)*0.5f);
-		
 		BoxCollider west_wall_box_collider = west_wall.AddComponent<BoxCollider>();
 		west_wall_box_collider.size = new Vector3(_padding_depth, _padding_up, _padding_overflow+height);
+		west_wall.transform.position = new Vector3(west_wall_box_collider.size.x*-0.5f+_inner_padding, 0, height/2);
 		
-		
+		//EAST WALL
 		GameObject east_wall = new GameObject();
 		east_wall.name = "_east_wall";
 		east_wall.transform.parent = gameObject.transform;
-		east_wall.transform.position = new Vector3(_padding_depth*0.5f+width-_inner_padding,0,(height+_padding_overflow)*0.5f);
-		
 		BoxCollider east_wall_box_collider = east_wall.AddComponent<BoxCollider>();
 		east_wall_box_collider.size = new Vector3(_padding_depth, _padding_up, _padding_overflow+height);
+		east_wall.transform.position = new Vector3(east_wall_box_collider.size.x*0.5f+width-_inner_padding, 0, height/2);
 		
-		/*
+		//SOUTH WALL
 		GameObject south_wall = new GameObject();
 		south_wall.name = "_south_wall";
 		south_wall.transform.parent = gameObject.transform;
-		south_wall.transform.position = new Vector3(width*0.5f,0,_padding_width*-0.5f);
-		
 		BoxCollider south_wall_box_collider = south_wall.AddComponent<BoxCollider>();
-		south_wall_box_collider.size = new Vector3(_padding_height,_padding_height,_padding_width);
+		south_wall_box_collider.size = new Vector3(width+_padding_overflow,_padding_up, _padding_depth);
+		south_wall.transform.position = new Vector3( width / 2, 0, south_wall_box_collider.size.z*-0.5f+_inner_padding);
 		
+		//NORTH WALL
 		GameObject north_wall = new GameObject();
 		north_wall.name = "_north_wall";
 		north_wall.transform.parent = gameObject.transform;
-		north_wall.transform.position = new Vector3(0,0,height);
-		
 		BoxCollider north_wall_box_collider = north_wall.AddComponent<BoxCollider>();
-		north_wall_box_collider.size = new Vector3(_padding_height,_padding_height,10);
+		north_wall_box_collider.size = new Vector3(width+_padding_overflow*2,_padding_up, _padding_depth);
+		north_wall.transform.position = new Vector3( width / 2, 0, north_wall_box_collider.size.z*0.5f+height-_inner_padding);
 		
+		//FLOOR
 		GameObject floor_wall = new GameObject();
 		floor_wall.name = "_floor_wall";
 		floor_wall.transform.parent = gameObject.transform;
-		floor_wall.transform.position = new Vector3(15,-11,15);
-		
+		floor_wall.transform.position = new Vector3(width*0.5f,_padding_up*-0.5f-0.5f,height*0.5f);
 		BoxCollider floor_wall_box_collider = floor_wall.AddComponent<BoxCollider>();
-		floor_wall_box_collider.size = new Vector3(_padding_height,20,_padding_height);
-		*/
+		floor_wall_box_collider.size = new Vector3(width+_padding_overflow,_padding_up,height+_padding_overflow);
+		
+		
+		//CAMERA CONTROL CLASS
 		GameObject camera_container = new GameObject();
 		camera_container.name = "__CAMERA";
-		//camera_container.transform.position = Vector3.zero;
+		
+		GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+		cube.transform.parent = camera_container.transform;
+		
 		Vector3 camera_pos = Camera.mainCamera.gameObject.transform.position;
 		camera_pos.y = 0;
-		camera_container.transform.position = camera_pos;
-		
+		camera_container.transform.localPosition = camera_pos;
 		camera_container.transform.parent = gameObject.transform;
 		
 		Camera.mainCamera.gameObject.transform.parent = camera_container.transform;
