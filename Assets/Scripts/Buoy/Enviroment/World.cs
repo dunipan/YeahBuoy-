@@ -13,7 +13,7 @@ public class World : MonoBehaviour {
 	protected float _padding_up = 10f;
 	protected float _padding_depth = 100f;
 	protected float _padding_overflow = 10f;
-	protected float _inner_padding = 1f;
+	protected float _inner_padding = 0.25f;
 	
 	public bool show_ruler = false;
 	public Material ruler_mesh1;

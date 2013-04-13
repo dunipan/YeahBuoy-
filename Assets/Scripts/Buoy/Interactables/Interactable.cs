@@ -9,12 +9,21 @@ public class Interactable : MonoBehaviour {
 	
 	public List<Rigidbody> recentHits;
 	
+	protected Vector3 lookAtTarget = Vector3.zero;
+	protected bool lookAtEnabled = false;
+	protected Rigidbody _rb;
+	
+	protected bool debug = false;
+	protected GameObject debug_cube;
 	
 	//private Quaternion lookAtRotationStart;
 	//private float lookAtRotationPercent;
 	
 	protected void Start () {
 		recentHits = new List<Rigidbody>();
+		if (rigidbody){
+			_rb = rigidbody;
+		}
 	}
 	
 	protected virtual void DoInteraction (Rigidbody rb) { }
@@ -86,4 +95,31 @@ public class Interactable : MonoBehaviour {
 		}
 		
 	}
+	
+	protected Vector3 ApplyForceToRigidBody(Vector3 worldPosVector3, float force_multiplier) {
+		if (debug){
+			if (!debug_cube){
+				debug_cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+				Collider.Destroy(debug_cube.GetComponent<BoxCollider>());
+				debug_cube.transform.parent = gameObject.transform;
+			}
+		}
+		if (_rb){
+			//DON'T APPLY ANY FORCE VERTICALLY
+			worldPosVector3.y = transform.position.y;
+			
+			//GET THE DISTANCE BETWEEN OUR TWO POINTS
+			Vector3 direction = _rb.transform.position - worldPosVector3;
+			if (debug_cube){
+				debug_cube.transform.localPosition = direction.normalized;
+			}
+			//ADD OUR FORCE
+			_rb.AddForce(direction.normalized * force_multiplier);
+			
+			//ROTATE TO LOOK IN THE DIRECTION WE ARE GOING
+			lookAtTarget = worldPosVector3;
+			lookAtEnabled = true;
+		}
+		return worldPosVector3;
+    }
 }

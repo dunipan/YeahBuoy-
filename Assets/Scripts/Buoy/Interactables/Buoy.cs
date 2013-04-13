@@ -14,12 +14,11 @@ public class Buoy : Interactable {
 	//FORCE MULTIPLIER FOR OUR CLICKS
 	public const float POWER = 180.0f;
 	
-	private Vector3 lookAtTarget = Vector3.zero;
-	private bool lookAtEnabled = false;
 	
 	private GameObject _debug_cube;
 	
 	void Start () {
+		debug = true;
 		base.Start();
 		gameObject.tag = "Buoy";
 		
@@ -51,27 +50,21 @@ public class Buoy : Interactable {
 	}
 	
 	void ApplyForce(Vector3 worldPosVector3) {
-		//DON'T APPLY ANY FORCE VERTICALLY
-		worldPosVector3.y = transform.position.y;
-		
 		GameObject ripple = GameObject.FindGameObjectWithTag("Ripple");
 		if (ripple){
-			ripple.transform.position = worldPosVector3 + new Vector3(0,1,0);
+			Vector3 ripple_pos = worldPosVector3 + new Vector3(0,1,0);
+			ripple_pos.y = transform.position.y;
+			ripple.transform.position = ripple_pos;
 			Animation ripple_anim = ripple.GetComponent<Animation>();
 			if (ripple_anim){
 				ripple_anim.Play();
 			}
 		}
 		
-		//GET THE DISTANCE BETWEEN OUR TWO POINTS
-		Vector3 direction = rigidbody.transform.position - worldPosVector3;
+		D.Log<float>(ForceMultiplier(worldPosVector3));
 		
 		//ADD OUR FORCE
-		rigidbody.AddForce(direction.normalized * ForceMultiplier(worldPosVector3));
-		
-		//ROTATE TO LOOK IN THE DIRECTION WE ARE GOING
-		lookAtTarget = worldPosVector3;
-		lookAtEnabled = true;
+		ApplyForceToRigidBody(worldPosVector3, ForceMultiplier(worldPosVector3));
     }
 	
 	protected override void DoInteraction(Rigidbody rb) 
