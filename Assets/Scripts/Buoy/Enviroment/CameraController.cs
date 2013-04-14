@@ -51,5 +51,8 @@ public class CameraController : MonoBehaviour {
 		Vector3 camera_target = buoy_transform.position + buoy_rigidbody.velocity;
 		Vector3 onScreenPos = camera.WorldToScreenPoint(camera_target);
 		EvalOnScreenPosition(onScreenPos, camera_target);
+		if (Input.GetAxis("Mouse ScrollWheel") != 0.0f){
+			Camera.main.orthographicSize += Input.GetAxis("Mouse ScrollWheel") * 0.5f;
+		}
 	}
 }

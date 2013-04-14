@@ -76,10 +76,7 @@ public class World : MonoBehaviour {
 		//CAMERA CONTROL CLASS
 		GameObject camera_container = new GameObject();
 		camera_container.name = "__CAMERA";
-		
-		GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-		cube.transform.parent = camera_container.transform;
-		
+				
 		Vector3 camera_pos = Camera.mainCamera.gameObject.transform.position;
 		camera_pos.y = 0;
 		camera_container.transform.localPosition = camera_pos;

@@ -18,7 +18,6 @@ public class Buoy : Interactable {
 	private GameObject _debug_cube;
 	
 	void Start () {
-		debug = true;
 		base.Start();
 		gameObject.tag = "Buoy";
 		

@@ -8,7 +8,6 @@ public class PenaltyObject : PathFollower {
 	
 	void Start () {
 		base.Start();
-		path = iTweenPath.GetPath( this.path_name );
 		//debug = true;
 		lookAtEnabled = true;
 		loop = true;

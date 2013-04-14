@@ -1,68 +1,152 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PathFollower : Interactable {
 	public string path_name = "Kayak Bottom Path";
 	
-	protected Vector3[] path;
+	public float travel_speed = 40.0f;
+	public float animation_cooldown_on_interaction = 5.0f;
+	
+	public Vector3[] path;
 	protected int current_index = 0;
+	protected int prev_index = 0;
 	
 	protected bool reverse = false;
-	protected bool loop = false;	
-	
-	protected void FixedUpdate(){
-		Vector3 target = path[current_index];
-		target.y = transform.position.y;
-		float distance = Vector3.Distance( transform.position, target);
-		if (distance < 1.0f){
-			if (loop){
-				current_index++;
-			}else{
-				if (reverse){
-					current_index--;
-				}else{
-					current_index++;
-				}
-			}
-			if ( current_index < 0){
-				reverse = false;
-				current_index = 0;
-			}else if(current_index >= path.Length ){
-				if(loop){
-					current_index = 0;
-				}else{
-					reverse = true;
-					current_index = path.Length - 1;
-				}
-			}
-			lookAtEnabled = true;
-		}
-		D.Log<string>(distance.ToString());
-		DoTest( path[current_index] , 20.0f);
+	protected bool loop = false;
+	protected bool curve = true;
+	protected bool running = true;
 		
-		GameObject ripple = GameObject.FindGameObjectWithTag("Ripple");
-		if (ripple){
-			Vector3 ripple_pos = path[current_index] + new Vector3(0,1,0);
-			ripple_pos.y = transform.position.y;
-			ripple.transform.position = ripple_pos;
-		}
-		
-		if( lookAtEnabled ){
-		    lookAtTarget.y = transform.position.y;
-			Quaternion q = Quaternion.LookRotation(lookAtTarget - transform.position);
-			float f = 5 * Time.deltaTime;
-		    transform.rotation = Quaternion.Slerp(transform.rotation, q , f);
+	protected void Start(){
+		base.Start();
+		path = iTweenPath.GetPath( path_name );
+		if(path != null){
+			if (path.Length > 4 && curve){
+				int loops = 0;
+				prev_index = current_index;
+				List<Vector3> bezier_path = new List<Vector3>();
+				
+				
+				Curve b;
+				float t = 0.0f;
+				do {
+					b = GetNextCurve();
+					t = 0.0f;
+					while ( t < 1.0f){
+						bezier_path.Add( b.GetPointAtTime( t ));
+						if (true){
+							GameObject g = GameObject.CreatePrimitive(PrimitiveType.Cube);
+							g.name = loop.ToString() + " - " + t.ToString();
+							Destroy( g.GetComponent<BoxCollider>() );
+							Vector3 pos = b.GetPointAtTime( t );
+							pos.y = 0.25f;
+							g.transform.position = pos;
+							g.renderer.material = World.current_world.ruler_mesh2;
+							g.transform.localScale = new Vector3(0.25f, 1f, 0.25f);
+						}
+						t += 0.1f;
+					}
+					
+					prev_index = current_index;
+					loops++;
+					if (loops > 256){
+						Debug.LogError("TOO MANY LOOPS IN PATH_FOLLOWER");
+						break;
+					}
+				}while(b.EndPoint != path[0]);
+				path = bezier_path.ToArray();
+			}
 		}
 	}
 	
-	protected Vector3 DoTest(Vector3 worldPosVector3, float force_multiplier) {
-		if (debug){
-			if (!debug_cube){
-				debug_cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-				Collider.Destroy(debug_cube.GetComponent<BoxCollider>());
-				debug_cube.transform.parent = gameObject.transform;
+	private Curve GetNextCurve(){
+		if (current_index >= path.Length)
+		{
+			current_index = 0;
+		}
+		int index1 = current_index;
+		int index2 = current_index+1;
+		int index3 = current_index+2;
+		if (current_index == path.Length - 2){
+			index3 = 0;
+			current_index = 0;
+		}else if (current_index == path.Length - 1){
+			index2 = 0;
+			index3 = 1;
+			current_index = 1;
+		}else{
+			current_index = current_index + 2;
+		}
+		return new Curve( path[index1],  path[index2], path[index3] );
+	}
+	/*
+	private Bezier GetNextBezier(){
+		if (current_index >= path.Length)
+		{
+			current_index = 0;
+		}
+		int index1 = current_index;
+		int index2 = current_index+1;
+		int index3 = current_index+2;
+		int index4 = current_index+3;
+		if (current_index == path.Length - 3){
+			index4 = 0;
+			current_index = 0;
+		}else if (current_index == path.Length - 2){
+			index3 = 0;
+			index4 = 1;
+			current_index = 1;
+		}else if (current_index == path.Length - 1){
+			index2 = 0;
+			index3 = 1;
+			index4 = 2;
+			current_index = 2;
+		}else{
+			current_index = current_index + 4;
+		}
+		//D.Log<string>( prev_index.ToString() + " -> " + current_index.ToString() );
+		return new Bezier( path[index1],  path[index2], path[index3], path[index4] );
+	}
+	*/
+	protected void FixedUpdate(){
+		if (running){
+			Vector3 target = path[current_index];
+			target.y = transform.position.y;
+			float distance = Vector3.Distance( transform.position, target);
+			if (distance < 1.0f){
+				if (loop){
+					current_index++;
+				}else{
+					if (reverse){
+						current_index--;
+					}else{
+						current_index++;
+					}
+				}
+				if ( current_index < 0){
+					reverse = false;
+					current_index = 0;
+				}else if(current_index >= path.Length ){
+					if(loop){
+						current_index = 0;
+					}else{
+						reverse = true;
+						current_index = path.Length - 1;
+					}
+				}
+				lookAtEnabled = true;
+			}
+			ApplyForceToRigidbody( path[current_index] , travel_speed );
+			if( lookAtEnabled ){
+			    lookAtTarget.y = transform.position.y;
+				Quaternion q = Quaternion.LookRotation(lookAtTarget - transform.position);
+				float f = 5 * Time.deltaTime;
+			    transform.rotation = Quaternion.Slerp(transform.rotation, q , f);
 			}
 		}
+	}
+	
+	protected Vector3 ApplyForceToRigidbody(Vector3 worldPosVector3, float force_multiplier) {
 		if (_rb){
 			//DON'T APPLY ANY FORCE VERTICALLY
 			worldPosVector3.y = transform.position.y;
@@ -81,7 +165,24 @@ public class PathFollower : Interactable {
 			//ROTATE TO LOOK IN THE DIRECTION WE ARE GOING
 			lookAtTarget = worldPosVector3;
 			lookAtEnabled = true;
+		}else{
+			D.Warn<string>("NO RB ON PATH FOLLOWER");
 		}
 		return worldPosVector3;
+    }
+	
+	protected override void DoInteraction(Rigidbody rb) {
+		if (running){
+			StartCoroutine("Cooldown");
+		}
+	}
+	
+	IEnumerator Cooldown () {
+		while(running) {
+			running = false;
+			yield return new WaitForSeconds(animation_cooldown_on_interaction);
+	    }
+		running = true;
+		yield return null;
     }
 }
