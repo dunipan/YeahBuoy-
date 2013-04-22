@@ -1,13 +1,6 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Buoy\Helpers\WaterRaycastDict.cs">
-    <Files>
-      <File FileName="Assets\Scripts\Buoy\Helpers\WaterRaycastDict.cs" Line="80" Column="13" />
-      <File FileName="Assets\Plugins\ColliderFreeRaycast\ColliderFreeRaycastTest.cs" Line="52" Column="5" />
-      <File FileName="Assets\Scripts\Buoy\Enviroment\CameraController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Player Scripts\WaterClick.cs" Line="16" Column="17" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

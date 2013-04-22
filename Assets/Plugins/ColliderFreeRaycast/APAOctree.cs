@@ -92,7 +92,7 @@ public class APAOctree {
 	public APAOctree IndexTriangle(Triangle triangle){
 		return IndexTriangle(this, triangle);	
 	}
-	//*
+	/*
 	public APAOctree IndexTriangle(APAOctree parentNode, Triangle triangle) {
   		// Compute triangle bounds (not using the param version of Mathf.Min() to avoid array allocation)
   		float minX = Mathf.Min(triangle.pt0.x, Mathf.Min(triangle.pt1.x, triangle.pt2.x));
@@ -135,7 +135,7 @@ public class APAOctree {
     	return finalNode;
 	}
 	//*/
-	/*
+	//*
 	public APAOctree IndexTriangle(APAOctree parentNode, Triangle triangle){
 		APAOctree finalNode = parentNode;
 		if (this.ContainsTriangle(triangle)){

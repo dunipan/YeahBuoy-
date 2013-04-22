@@ -103,19 +103,20 @@ public class Interactable : MonoBehaviour {
 	}
 	
 	protected float GetTargetY(){
-		
-		if (Time.time > float_check_cooldown+0.2f){
-			WaterRaycastHit hit = new WaterRaycastHit();
-			Ray r = new Ray( transform.position, Vector3.down);
-			if (WaterRaycast.Raycast(r, out hit)){
-				float_check_cooldown = Time.time;
-				last_hit_point = hit.point;
-				last_hit_object = hit.transform;
+		if (WaterRaycastDict.singleton.ready){
+			if (Time.time > float_check_cooldown+0.2f){
+				WaterRaycastHit hit = new WaterRaycastHit();
+				Ray r = new Ray( transform.position, Vector3.down);
+				if (WaterRaycast.Raycast(r, out hit)){
+					float_check_cooldown = Time.time;
+					last_hit_point = hit.point;
+					last_hit_object = hit.transform;
+				}
 			}
-		}
-		if(last_hit_object){
-			Vector3 hit_pos = last_hit_point - last_hit_object.position;
-			return Mathf.Lerp(transform.position.y, hit_pos.y + FloatHeightAdjustment, Time.deltaTime);
+			if(last_hit_object){
+				Vector3 hit_pos = last_hit_point - last_hit_object.position;
+				return Mathf.Lerp(transform.position.y, hit_pos.y + FloatHeightAdjustment, Time.deltaTime);
+			}
 		}
 		return transform.position.y;
 	}

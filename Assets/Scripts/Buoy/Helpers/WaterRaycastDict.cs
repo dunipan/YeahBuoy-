@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class WaterRaycastDict : MonoBehaviour {
 	
 	public APAOctree octree;
+	public bool ready = false;
+	private APAOctree building;
 	public static WaterRaycastDict singleton;
 	private int octreeDepth = 3;
 	private int objectsPerChunk = 1000;
@@ -24,10 +26,7 @@ public class WaterRaycastDict : MonoBehaviour {
 		
 	public void Init (CallbackMethod del, Bounds bounds)
 	{
-		if (octree != null){
-			octree.Clear();
-		}
-		octree = new APAOctree(bounds, octreeDepth);
+		building = new APAOctree(bounds, octreeDepth);
 		StartCoroutine(PopulateOctree (del));		
 	}
 	
@@ -49,7 +48,7 @@ public class WaterRaycastDict : MonoBehaviour {
 			curTris = new Triangle[] {};
 			curTris = GetTriangles(curGO);
 			for (int k = 0; k < curTris.Length; k++){
-				finalNode = octree.IndexTriangle(curTris[k]);
+				finalNode = building.IndexTriangle(curTris[k]);
 				finalNode.AddTriangle(curTris[k]);	
 			}
 			
@@ -57,7 +56,13 @@ public class WaterRaycastDict : MonoBehaviour {
 				yield return 0;
 			}
 		}
-		
+		//KEEP THE OLD POINTS IN MEMORY
+		APAOctree old = octree;
+		octree = building;
+		if (old != null){
+			old.Clear();
+		}
+		ready = true;
 		del();
 		//Debug.Log("Created Database");
 		//Debug.Log("Total Indexed Triangles: " + GetTriangleCount(octree));
