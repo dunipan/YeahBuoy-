@@ -85,7 +85,21 @@ public class Scoreboard : MonoBehaviour {
 	void onLevelFinish(Rigidbody rb){
 		_running = false;
 		_over = true;
-		
+		PostGame();
+	}
+	
+	void onSwimmerHit(Rigidbody rb){
+		_score += 1000;
+	}
+	
+	void onDeadSwimmer(GameObject go){
+		_running = false;
+		_over = true;
+		_score = 0;
+		PostGame();
+	}
+	
+	void PostGame(){
 		string key = Application.loadedLevelName + "_score";
 		if (PlayerPrefs.HasKey(key)){
 			if (PlayerPrefs.GetInt(key) < _score){
@@ -96,15 +110,6 @@ public class Scoreboard : MonoBehaviour {
 		}
 		
 		Application.LoadLevel("LevelComplete");
-	}
-	
-	void onSwimmerHit(Rigidbody rb){
-		_score += 1000;
-	}
-	
-	void onDeadSwimmer(GameObject go){
-		_running = false;
-		_over = true;
 	}
 	
 	void onPenalty(Rigidbody rb){
