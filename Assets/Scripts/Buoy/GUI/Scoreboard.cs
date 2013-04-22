@@ -35,6 +35,13 @@ public class Scoreboard : MonoBehaviour {
 		D.Log<string>("GAME OVER IN : " + (total_seconds*points_interval).ToString() + " SECONDS");
 		_over = false;
 		StartCoroutine("Ticker");
+		
+		string key = Application.loadedLevelName + "_score";
+		if (PlayerPrefs.HasKey(key)){
+			D.Log<string>("YOUR PREVIOUS BEST SCORE WAS : " + PlayerPrefs.GetInt(key).ToString());
+		}else{
+			D.Log<string>("YOU HAVE NEVER BEAT THIS LEVEL");
+		}
 	}
 	
 	public static bool clock_ticking
@@ -78,6 +85,17 @@ public class Scoreboard : MonoBehaviour {
 	void onLevelFinish(Rigidbody rb){
 		_running = false;
 		_over = true;
+		
+		string key = Application.loadedLevelName + "_score";
+		if (PlayerPrefs.HasKey(key)){
+			if (PlayerPrefs.GetInt(key) < _score){
+				PlayerPrefs.SetInt(key, _score);
+			}
+		}else{
+			PlayerPrefs.SetInt(key, _score);
+		}
+		
+		Application.LoadLevel("LevelComplete");
 	}
 	
 	void onSwimmerHit(Rigidbody rb){

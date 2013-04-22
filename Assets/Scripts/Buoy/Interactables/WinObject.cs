@@ -47,7 +47,7 @@ public class WinObject : Interactable {
 			points_left -= 1;
 			yield return new WaitForSeconds(points_interval);
 	    }
-		if (points_left <= 0 && _running){
+		if (points_left <= 0 && !safe){
 			D.Log<string>("WIN_OBJECT_DEAD");
 			D.Log<GameObject>(gameObject);
 			Messenger<GameObject>.Broadcast(WinObject.WIN_OBJECT_DEAD, this.gameObject);
@@ -56,26 +56,6 @@ public class WinObject : Interactable {
     }
 	
 	void FixedUpdate(){
-		/*
-		Ray r = new Ray( transform.position, Vector3.down);
-		RaycastHit[] hits;
-		
-		Vector3 top = transform.position + FloatCheckAdjustment;
-		
-		Debug.DrawLine (top, new Vector3( top.x, top.y-FloatDistance, top.z), Color.red);
-		
-        hits = Physics.RaycastAll(top, Vector3.down, FloatDistance);
-		int i = 0;
-		while (i < hits.Length){
-			if (hits[i].collider.gameObject.layer == 4){
-				Vector3 t = transform.position;
-				t.y = hits[i].point.y + FloatHeightAdjustment;
-				transform.position = t;
-				break;
-			}
-			i++;
-		}
-		*/
 		Vector3 t = transform.position;
 		t.y = GetTargetY();
 		transform.position = t;

@@ -25,27 +25,4 @@ public class WaterClick : MonoBehaviour {
 			}
 		}
 	}
-	/*
-	void Update () {
-		if(Input.GetMouseButtonDown(0)){
-			if (Time.timeSinceLevelLoad - cooldown > COOLDOWN_DURATION){
-				cooldown = Time.timeSinceLevelLoad;
-				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-				RaycastHit[] hits;
-		        hits = Physics.RaycastAll(ray);
-		        int i = 0;
-		        while (i < hits.Length) {
-		            RaycastHit hit = hits[i];
-		            GameObject gameObject = hit.transform.gameObject;
-					if (gameObject.layer == waterMask){
-						GameObject buoy = GameObject.FindGameObjectWithTag("Buoy");
-						buoy.BroadcastMessage("ApplyForce",hit.point);
-						break;
-					}
-		            i++;
-		        }
-			}
-		}
-	}
-	*/
 }
