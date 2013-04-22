@@ -37,7 +37,6 @@ public class Buoy : Interactable {
 			}
 		    transform.rotation = Quaternion.Slerp(transform.rotation, q , f);
 		}
-		
 		_debug_cube.transform.position = transform.position + rigidbody.velocity;
 	}
 	
@@ -52,15 +51,13 @@ public class Buoy : Interactable {
 		GameObject ripple = GameObject.FindGameObjectWithTag("Ripple");
 		if (ripple){
 			Vector3 ripple_pos = worldPosVector3 + new Vector3(0,1,0);
-			ripple_pos.y = transform.position.y;
+			ripple_pos.y = GetTargetY();
 			ripple.transform.position = ripple_pos;
 			Animation ripple_anim = ripple.GetComponent<Animation>();
 			if (ripple_anim){
 				ripple_anim.Play();
 			}
 		}
-		
-		D.Log<float>(ForceMultiplier(worldPosVector3));
 		
 		//ADD OUR FORCE
 		ApplyForceToRigidBody(worldPosVector3, ForceMultiplier(worldPosVector3));

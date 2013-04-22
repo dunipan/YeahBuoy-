@@ -21,6 +21,7 @@ public class World : MonoBehaviour {
 	
 	public Rect WorldRect;
 	
+	private float time_to_recalculate_water = 1.0f;
 	void Start () {
 		World._world = this;
 		//PUT OURSELVES AT 0,0,0
@@ -93,8 +94,26 @@ public class World : MonoBehaviour {
 			r.GenerateRuler(ruler_mesh1, ruler_mesh2);
 		}
 		
+		gameObject.AddComponent<WaterRaycastDict>();
+		
+		StartCoroutine("RefreshWater");
 	}
 	
+	public void Callback(){
+		
+	}
+	
+	IEnumerator RefreshWater (){
+		while(true) {
+			WaterRaycastDict.singleton.Init(Callback, bounds);	
+			yield return new WaitForSeconds(time_to_recalculate_water);
+	    }
+		if( Scoreboard.is_over){
+			yield return null;
+		}
+		yield return new WaitForSeconds(time_to_recalculate_water);
+	}
+		
 	public Vector3 CapPosition(Vector3 worldPos){
 		Vector2 pos = new Vector2( worldPos.x, worldPos.z);
 		if (!WorldRect.Contains( pos )){
@@ -118,6 +137,15 @@ public class World : MonoBehaviour {
 	    get { return World._world; }
 	}
 	
+	public Bounds bounds
+	{
+	    get { 
+			return new Bounds( new Vector3( width/2f, 0f, height/2f), new Vector3(width, 25f, height));
+		}
+	}
+	
+	
+	
 	public static List<GameObject> left_to_hit
 	{
 	    get { 
@@ -135,6 +163,7 @@ public class World : MonoBehaviour {
 	}
 	
 	public static void winning_object_hit(GameObject go){
+		D.Log<string>("winning_object_hit");
 		if (World.left_to_hit.IndexOf(go) > -1){
 			World.left_to_hit.Remove(go);
 		}

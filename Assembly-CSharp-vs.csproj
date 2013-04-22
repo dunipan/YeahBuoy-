@@ -52,6 +52,8 @@
      <Compile Include="Assets\Scripts\Buoy\GUI\LifePreservers.cs" />
      <Compile Include="Assets\Scripts\Buoy\GUI\OnScreenText.cs" />
      <Compile Include="Assets\Scripts\Buoy\GUI\Scoreboard.cs" />
+     <Compile Include="Assets\Scripts\Buoy\Helpers\WaterRaycast.cs" />
+     <Compile Include="Assets\Scripts\Buoy\Helpers\WaterRaycastDict.cs" />
      <Compile Include="Assets\Scripts\Buoy\Interactables\Buoy.cs" />
      <Compile Include="Assets\Scripts\Buoy\Interactables\ForceBasedAnimation.cs" />
      <Compile Include="Assets\Scripts\Buoy\Interactables\Interactable.cs" />

@@ -8,13 +8,15 @@ public class PathFollower : Interactable {
 	public float travel_speed = 40.0f;
 	public float animation_cooldown_on_interaction = 5.0f;
 	
+	public Vector3 LookAdjustment = new Vector3(0, 0, 0);
+	
 	public Vector3[] path;
 	protected int current_index = 0;
 	protected int prev_index = 0;
 	
 	protected bool reverse = false;
 	protected bool loop = false;
-	protected bool curve = true;
+	protected bool curve = false;
 	protected bool running = true;
 		
 	protected void Start(){
@@ -34,16 +36,6 @@ public class PathFollower : Interactable {
 					t = 0.0f;
 					while ( t < 1.0f){
 						bezier_path.Add( b.GetPointAtTime( t ));
-						if (true){
-							GameObject g = GameObject.CreatePrimitive(PrimitiveType.Cube);
-							g.name = loop.ToString() + " - " + t.ToString();
-							Destroy( g.GetComponent<BoxCollider>() );
-							Vector3 pos = b.GetPointAtTime( t );
-							pos.y = 0.25f;
-							g.transform.position = pos;
-							g.renderer.material = World.current_world.ruler_mesh2;
-							g.transform.localScale = new Vector3(0.25f, 1f, 0.25f);
-						}
 						t += 0.1f;
 					}
 					
@@ -140,8 +132,11 @@ public class PathFollower : Interactable {
 			if( lookAtEnabled ){
 			    lookAtTarget.y = transform.position.y;
 				Quaternion q = Quaternion.LookRotation(lookAtTarget - transform.position);
+				q.eulerAngles = q.eulerAngles + LookAdjustment;
 				float f = 5 * Time.deltaTime;
-			    transform.rotation = Quaternion.Slerp(transform.rotation, q , f);
+				q = Quaternion.Slerp(transform.rotation, q , f);
+				
+			    transform.rotation = q;
 			}
 		}
 	}
@@ -173,7 +168,9 @@ public class PathFollower : Interactable {
 	
 	protected override void DoInteraction(Rigidbody rb) {
 		if (running){
-			StartCoroutine("Cooldown");
+			if (rb.gameObject.GetComponent<Buoy>() != null){
+				StartCoroutine("Cooldown");
+			}
 		}
 	}
 	

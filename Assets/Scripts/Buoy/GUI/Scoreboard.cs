@@ -7,7 +7,8 @@ public class Scoreboard : MonoBehaviour {
 	
 	private int _score;
 	private int _prev_score;
-	private bool _running = true;
+	private static bool _running = true;
+	private static bool _over = false;
 	private GUIText textfield;
 	
 	
@@ -31,8 +32,21 @@ public class Scoreboard : MonoBehaviour {
 		_prev_score = _score = total_seconds;
         textfield = gameObject.GetComponent<GUIText>();
 		
+		D.Log<string>("GAME OVER IN : " + (total_seconds*points_interval).ToString() + " SECONDS");
+		_over = false;
 		StartCoroutine("Ticker");
 	}
+	
+	public static bool clock_ticking
+	{
+	    get { return _running; }
+	}
+	
+	public static bool is_over{
+		get{ return _over; }
+	}
+	
+	
 	public void show_text( string text, Vector3 loc ){
 		GameObject go = new GameObject();
 		OnScreenText ost = go.AddComponent<OnScreenText>();
@@ -63,6 +77,16 @@ public class Scoreboard : MonoBehaviour {
 	
 	void onLevelFinish(Rigidbody rb){
 		_running = false;
+		_over = true;
+	}
+	
+	void onSwimmerHit(Rigidbody rb){
+		_score += 1000;
+	}
+	
+	void onDeadSwimmer(GameObject go){
+		_running = false;
+		_over = true;
 	}
 	
 	void onPenalty(Rigidbody rb){
@@ -75,10 +99,14 @@ public class Scoreboard : MonoBehaviour {
 	void OnEnable()	{
 		Messenger<Rigidbody>.AddListener(Buoy.BUOY_HIT_FINAL_WIN_OBJECT, onLevelFinish);
 		Messenger<Rigidbody>.AddListener(Buoy.BUOY_HIT_PENALTY_OBJECT, onPenalty);
+		Messenger<GameObject>.AddListener(WinObject.WIN_OBJECT_DEAD, onDeadSwimmer);
+		Messenger<Rigidbody>.AddListener(Buoy.BUOY_HIT_WIN_OBJECT, onSwimmerHit);
 	}
 	
 	void OnDisable(){
 		Messenger<Rigidbody>.RemoveListener(Buoy.BUOY_HIT_FINAL_WIN_OBJECT, onLevelFinish);
 		Messenger<Rigidbody>.RemoveListener(Buoy.BUOY_HIT_PENALTY_OBJECT, onPenalty);
+		Messenger<GameObject>.RemoveListener(WinObject.WIN_OBJECT_DEAD, onDeadSwimmer);
+		Messenger<Rigidbody>.RemoveListener(Buoy.BUOY_HIT_WIN_OBJECT, onSwimmerHit);
 	}
 }

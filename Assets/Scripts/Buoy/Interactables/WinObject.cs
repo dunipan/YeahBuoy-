@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class WinObject : Interactable {
 	public const string WIN_OBJECT_DEAD = "winObjectDead";
@@ -8,6 +9,8 @@ public class WinObject : Interactable {
 	public int points_left = 1001;
 	public float points_interval = 0.1f;
 	
+	private bool safe = false;
+		
 	void Start () {
 		base.Start();
 		World.winning_object_created(this.gameObject);
@@ -18,6 +21,8 @@ public class WinObject : Interactable {
 		}else{
 			_running = false;
 		}
+		
+		D.Log<string>(gameObject.name + " : DEAD IN " + (points_left * points_interval).ToString() + " SECONDS");
 	}
 	
 	protected void ShowTimer(){
@@ -31,7 +36,8 @@ public class WinObject : Interactable {
 	
 	protected override void DoInteraction(Rigidbody rb) {
 		Buoy buoy = rb.gameObject.GetComponent<Buoy>();
-		if (buoy){
+		if (buoy && !safe){
+			safe = true;
 			World.winning_object_hit(this.gameObject);
 		}
 	}
@@ -42,9 +48,36 @@ public class WinObject : Interactable {
 			yield return new WaitForSeconds(points_interval);
 	    }
 		if (points_left <= 0 && _running){
-			//TODO: NO ONE IS LISTENING TO THIS
+			D.Log<string>("WIN_OBJECT_DEAD");
+			D.Log<GameObject>(gameObject);
 			Messenger<GameObject>.Broadcast(WinObject.WIN_OBJECT_DEAD, this.gameObject);
 		}
 		yield return null;
     }
+	
+	void FixedUpdate(){
+		/*
+		Ray r = new Ray( transform.position, Vector3.down);
+		RaycastHit[] hits;
+		
+		Vector3 top = transform.position + FloatCheckAdjustment;
+		
+		Debug.DrawLine (top, new Vector3( top.x, top.y-FloatDistance, top.z), Color.red);
+		
+        hits = Physics.RaycastAll(top, Vector3.down, FloatDistance);
+		int i = 0;
+		while (i < hits.Length){
+			if (hits[i].collider.gameObject.layer == 4){
+				Vector3 t = transform.position;
+				t.y = hits[i].point.y + FloatHeightAdjustment;
+				transform.position = t;
+				break;
+			}
+			i++;
+		}
+		*/
+		Vector3 t = transform.position;
+		t.y = GetTargetY();
+		transform.position = t;
+	}
 }

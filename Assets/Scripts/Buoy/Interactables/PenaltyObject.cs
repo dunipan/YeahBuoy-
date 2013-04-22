@@ -14,7 +14,9 @@ public class PenaltyObject : PathFollower {
 	}
 		
 	
-	protected override void DoInteraction(Rigidbody rb) { }
+	protected override void DoInteraction(Rigidbody rb) { 
+		base.DoInteraction(rb);
+	}
 	
 	
 }

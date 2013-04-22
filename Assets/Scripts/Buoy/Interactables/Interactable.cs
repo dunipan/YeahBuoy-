@@ -16,6 +16,12 @@ public class Interactable : MonoBehaviour {
 	protected bool debug = false;
 	protected GameObject debug_cube;
 	
+	public Vector3 FloatCheckAdjustment = new Vector3(0, 2, 0);
+	public float FloatHeightAdjustment = 0.13f;
+	private Vector3 last_hit_point;
+	private Transform last_hit_object;
+	private float float_check_cooldown = -10.0f;
+	
 	//private Quaternion lookAtRotationStart;
 	//private float lookAtRotationPercent;
 	
@@ -92,6 +98,34 @@ public class Interactable : MonoBehaviour {
 			Messenger<GameObject, float>.Broadcast(ForceBasedAnimation.FORCE_BASED_ANIMATION_CHANGE, gameObject, force);
 		}catch(Exception e){
 			D.Warn<Exception>(e);
+		}
+		
+	}
+	
+	protected float GetTargetY(){
+		
+		if (Time.time > float_check_cooldown+0.2f){
+			WaterRaycastHit hit = new WaterRaycastHit();
+			Ray r = new Ray( transform.position, Vector3.down);
+			if (WaterRaycast.Raycast(r, out hit)){
+				float_check_cooldown = Time.time;
+				last_hit_point = hit.point;
+				last_hit_object = hit.transform;
+			}
+		}
+		if(last_hit_object){
+			Vector3 hit_pos = last_hit_point - last_hit_object.position;
+			return Mathf.Lerp(transform.position.y, hit_pos.y + FloatHeightAdjustment, Time.deltaTime);
+		}
+		return transform.position.y;
+	}
+	
+	protected void FloatY(){
+		float target_y = GetTargetY();
+		Vector3 t = transform.position;
+		if (Mathf.Abs(t.y - target_y) > 0.01f){
+			t.y = target_y;
+			transform.position = t;	
 		}
 		
 	}
