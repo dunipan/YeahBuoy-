@@ -1,4 +1,4 @@
-Initialize engine version: 4.0.1f2
+Initialize engine version: 4.1.2f1 (911c7369eeac)
 GfxDevice: creating device client; threaded=1
 Direct3D:
     Version:  Direct3D 9.0c [dlumd32.dll 8.6.3.40660]
@@ -7,21 +7,22 @@ Direct3D:
     VRAM:     869 MB (via DXGI)
     Caps:     Shader=30 DepthRT=1 NativeDepth=1 NativeShadow=1 DF16=0 DF24=0 INTZ=1 RAWZ=0 NULL=1 RESZ=0 SlowINTZ=0
 Begin MonoManager ReloadAssembly
-Platform assembly: C:\Users\oto\Documents\New Unity Project\bin\test_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading C:\Users\oto\Documents\New Unity Project\bin\test_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: C:\Users\oto\Documents\New Unity Project\bin\test_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
-Loading C:\Users\oto\Documents\New Unity Project\bin\test_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
-Platform assembly: C:\Users\oto\Documents\New Unity Project\bin\test_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading C:\Users\oto\Documents\New Unity Project\bin\test_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: C:\Users\oto\Documents\New Unity Project\bin\test_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
-Loading C:\Users\oto\Documents\New Unity Project\bin\test_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
-- Completed reload, in  0.045 seconds
+Platform assembly: C:\Users\oto\Documents\GitHub\YeahBuoy-\bin\test_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\oto\Documents\GitHub\YeahBuoy-\bin\test_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\oto\Documents\GitHub\YeahBuoy-\bin\test_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\oto\Documents\GitHub\YeahBuoy-\bin\test_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\oto\Documents\GitHub\YeahBuoy-\bin\test_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\oto\Documents\GitHub\YeahBuoy-\bin\test_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\oto\Documents\GitHub\YeahBuoy-\bin\test_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
+Loading C:\Users\oto\Documents\GitHub\YeahBuoy-\bin\test_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
+- Completed reload, in  0.044 seconds
 desktop: 1920x1080 59Hz; virtual: 3840x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
+Platform assembly: C:\Users\oto\Documents\GitHub\YeahBuoy-\bin\test_Data\Managed\System.dll (this message is harmless)
 The referenced script on this Behaviour is missing!
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Mono/MonoBehaviour.cpp Line: 1591)
+(Filename:  Line: 1606)
 
 NullReferenceException: Object reference not set to an instance of an object
   at SplashScreen.Start () [0x00000] in <filename unknown>:0 
@@ -30,21 +31,148 @@ NullReferenceException: Object reference not set to an instance of an object
 
 The tree Kayak (non rigged) couldn't be instanced because the prefab contains no valid mesh renderer
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Terrain/TreeDatabase.cpp Line: 51)
+(Filename:  Line: 51)
 
-Platform assembly: C:\Users\oto\Documents\New Unity Project\bin\test_Data\Managed\System.dll (this message is harmless)
 Unloading 4 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
-Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 560. Operation took 2.567070 ms.
-Platform assembly: C:\Users\oto\Documents\New Unity Project\bin\test_Data\Managed\Boo.Lang.dll (this message is harmless)
-UnityEngine.Collision
+Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 760.
+Total: 0.580175 ms (FindLiveObjects: 0.023842 ms CreateObjectMapping: 0.014239 ms MarkObjects: 0.171867 ms  DeleteObjects: 0.025167 ms)
+
+[0] Swimmer_Bottom.Timer_rig_x90.Timer
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
 
-HIT
+[0]  PLAY FOR : 29.9 seconds
  
-(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
 
-Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+[0] Swimmer_Bottom.Timer_rig_x90.Timer : ITTERATIONS : 299
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
 
-Unloading 50 unused Assets to reduce memory usage. Loaded Objects now: 164. Operation took 2.744566 ms.
+[0] Swimmer_Bottom.Timer_rig_x90.Timer : ADJUSTMENT  : 0.003334448
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+[0] Swimmer_Bottom.Timer_rig_x90.Timer : 0/299
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+[0] Swimmer_Bottom : DEAD IN 29.9 SECONDS
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+[0] GAME OVER IN : 30 SECONDS
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+[0] YOUR PREVIOUS BEST SCORE WAS : 11000
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+[10.53227] Swimmer_Bottom.Timer_rig_x90.Timer : 100/299
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+[21.06579] Swimmer_Bottom.Timer_rig_x90.Timer : 200/299
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+[21.42025] miss?
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+[21.42025] BROADCAST POINT : (18.7, 0.0, 25.4)
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+[23.24026] miss?
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+[23.24026] BROADCAST POINT : (25.5, 0.0, 21.8)
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+[31.34822] ___________________ DONE ____________________ IN : 31.34822
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+[31.44921] WIN_OBJECT_DEAD
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+[31.44921] Swimmer_Bottom (UnityEngine.GameObject)
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+[31.44921] GAME DONE IN : 31.44921
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+Mem Before Clear: 2.039063
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+Mem After Clear: 0.4023438
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 43 unused Assets to reduce memory usage. Loaded Objects now: 184.
+Total: 1.233204 ms (FindLiveObjects: 0.013908 ms CreateObjectMapping: 0.013908 ms MarkObjects: 0.228824 ms  DeleteObjects: 0.366583 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 760.
+Total: 1.076239 ms (FindLiveObjects: 0.045036 ms CreateObjectMapping: 0.022187 ms MarkObjects: 0.337111 ms  DeleteObjects: 0.043711 ms)
+
+[0] Swimmer_Bottom.Timer_rig_x90.Timer
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+[0]  PLAY FOR : 29.9 seconds
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+[0] Swimmer_Bottom.Timer_rig_x90.Timer : ITTERATIONS : 299
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+[0] Swimmer_Bottom.Timer_rig_x90.Timer : ADJUSTMENT  : 0.003334448
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+[0] Swimmer_Bottom.Timer_rig_x90.Timer : 0/299
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+[0] Swimmer_Bottom : DEAD IN 29.9 SECONDS
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+[0] GAME OVER IN : 30 SECONDS
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+[0] GAME DONE IN : 0
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+[0] YOUR PREVIOUS BEST SCORE WAS : 11000
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+[0.07290532] BLOCKED BY COOLDOWN
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+Mem Before Clear: 1.898438
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+
+Mem After Clear: 0.421875
+ 
+(Filename: C:/BuildAgent/work/7535de4ca26c26ac/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 54)
+

@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Buoy\Enviroment\CameraController.cs" />
+     <Compile Include="Assets\Scripts\Buoy\Enviroment\CountDownRing.cs" />
      <Compile Include="Assets\Scripts\Buoy\Enviroment\Messenger.cs" />
      <Compile Include="Assets\Scripts\Buoy\Enviroment\Ruler.cs" />
      <Compile Include="Assets\Scripts\Buoy\Enviroment\RulerMesh.cs" />

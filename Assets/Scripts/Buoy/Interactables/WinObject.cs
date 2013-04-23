@@ -22,6 +22,9 @@ public class WinObject : Interactable {
 			_running = false;
 		}
 		
+		CountDownRing ring = gameObject.GetComponentInChildren<CountDownRing>();
+		ring.ShowTime( points_left * points_interval );
+		
 		D.Log<string>(gameObject.name + " : DEAD IN " + (points_left * points_interval).ToString() + " SECONDS");
 	}
 	

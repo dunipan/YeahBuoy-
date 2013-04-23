@@ -22,17 +22,18 @@ public class Scoreboard : MonoBehaviour {
 	public int silver_min = 3330;
 	
 	//HOW MANY SECONDS BETWEEN TICKS
-	public const float points_interval = 0.01f;
+	public const float points_interval = 0.1f;
 	
 	//HOW MANY POINTS TAKEN AWAY ON EACH TICK
 	public const int points_per_interval = 10;
 	
 	
 	void Start () {
-		_prev_score = _score = total_seconds;
+		_prev_score = total_seconds;
+		_score = total_seconds;
         textfield = gameObject.GetComponent<GUIText>();
-		
-		D.Log<string>("GAME OVER IN : " + (total_seconds*points_interval).ToString() + " SECONDS");
+		D.Log<GUIText>(textfield);
+		D.Log<string>("GAME OVER IN : " + ( (total_seconds/points_per_interval)*points_interval).ToString() + " SECONDS");
 		_over = false;
 		StartCoroutine("Ticker");
 		
@@ -74,11 +75,12 @@ public class Scoreboard : MonoBehaviour {
 	}
 	
 	IEnumerator Ticker () {
+		float t1 = Time.time;
 		while(_score > 0 && _running) {
 			subtract_value(points_per_interval);
 			yield return new WaitForSeconds(points_interval);
 	    }
-
+		D.Warn<string>("GAME DONE IN : " + (Time.time-t1).ToString());
 		yield return null;
     }
 	
@@ -120,6 +122,7 @@ public class Scoreboard : MonoBehaviour {
 	}
 	
 	void OnEnable()	{
+		textfield = gameObject.GetComponent<GUIText>();
 		Messenger<Rigidbody>.AddListener(Buoy.BUOY_HIT_FINAL_WIN_OBJECT, onLevelFinish);
 		Messenger<Rigidbody>.AddListener(Buoy.BUOY_HIT_PENALTY_OBJECT, onPenalty);
 		Messenger<GameObject>.AddListener(WinObject.WIN_OBJECT_DEAD, onDeadSwimmer);
@@ -127,6 +130,7 @@ public class Scoreboard : MonoBehaviour {
 	}
 	
 	void OnDisable(){
+		textfield = null;
 		Messenger<Rigidbody>.RemoveListener(Buoy.BUOY_HIT_FINAL_WIN_OBJECT, onLevelFinish);
 		Messenger<Rigidbody>.RemoveListener(Buoy.BUOY_HIT_PENALTY_OBJECT, onPenalty);
 		Messenger<GameObject>.RemoveListener(WinObject.WIN_OBJECT_DEAD, onDeadSwimmer);
