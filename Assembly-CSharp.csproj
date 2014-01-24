@@ -64,6 +64,7 @@
      <Compile Include="Assets\Scripts\Buoy\NewBehaviourScript.cs" />
      <Compile Include="Assets\Scripts\BuoyancyForce.cs" />
      <Compile Include="Assets\Scripts\FluidVolume.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\SimpleClick.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\WaterClick.cs" />
      <Compile Include="Assets\Scripts\Water Scripts\Water3.cs" />
      <Compile Include="Assets\Scripts\Water Scripts\Water3Float.cs" />

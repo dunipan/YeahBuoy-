@@ -94,9 +94,9 @@ public class World : MonoBehaviour {
 			r.GenerateRuler(ruler_mesh1, ruler_mesh2);
 		}
 		
-		gameObject.AddComponent<WaterRaycastDict>();
+		gameObject.AddComponent<SimpleClick>();
 		
-		StartCoroutine("RefreshWater");
+		//StartCoroutine("RefreshWater");
 	}
 	
 	public void Callback(){

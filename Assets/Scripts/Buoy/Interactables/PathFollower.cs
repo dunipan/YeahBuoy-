@@ -69,6 +69,7 @@ public class PathFollower : Interactable {
 		}else{
 			current_index = current_index + 2;
 		}
+		D.Log<int>(current_index);
 		return new Curve( path[index1],  path[index2], path[index3] );
 	}
 	/*

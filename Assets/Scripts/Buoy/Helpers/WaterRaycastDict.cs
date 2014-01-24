@@ -26,8 +26,7 @@ public class WaterRaycastDict : MonoBehaviour {
 		
 	public void Init (CallbackMethod del, Bounds bounds)
 	{
-		building = new APAOctree(bounds, octreeDepth);
-		StartCoroutine(PopulateOctree (del));		
+		
 	}
 	
 

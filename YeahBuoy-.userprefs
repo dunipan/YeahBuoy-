@@ -1,6 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Buoy/Interactables/PathFollower.cs">
+    <Files>
+      <File FileName="Assets/Scripts/Buoy/Interactables/PenaltyObject.cs" Line="5" Column="36" />
+      <File FileName="Assets/Scripts/Buoy/Interactables/PathFollower.cs" Line="72" Column="29" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

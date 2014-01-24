@@ -21,9 +21,9 @@ public class Buoy : Interactable {
 		base.Start();
 		gameObject.tag = "Buoy";
 		
-		_debug_cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-		_debug_cube.renderer.material = World.current_world.ruler_mesh1;
-		Collider.Destroy(_debug_cube.collider);
+		//_debug_cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+		//_debug_cube.renderer.material = World.current_world.ruler_mesh1;
+		//Collider.Destroy(_debug_cube.collider);
 	}
 	
 	void FixedUpdate (){
@@ -37,7 +37,7 @@ public class Buoy : Interactable {
 			}
 		    transform.rotation = Quaternion.Slerp(transform.rotation, q , f);
 		}
-		_debug_cube.transform.position = transform.position + rigidbody.velocity;
+		//_debug_cube.transform.position = transform.position + rigidbody.velocity;
 	}
 	
 	float ForceMultiplier(Vector3 worldPosVector3){
